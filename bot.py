@@ -101,6 +101,7 @@ async def members(ctx, gamemode):
     memberList.append(fileData["leader"]["username"])
     for member in fileData["members"]:
         memberList.append(member["username"])
+    memberList.append("Shoka (Honorary member/Former leader)")
     embed = discord.Embed(title="Shirokane's Family", color=0xff00ff, description="\n".join(memberList), url=f"https://osu.ppy.sh/teams/{teamId}")
     embed.set_thumbnail(url=flag)
     embed.add_field(name="Leader", inline=True, value=f"{fileData["leader"]["username"]}")
@@ -207,33 +208,25 @@ async def member(ctx, username):
 @bot.command(name="discord", aliases=["d"])
 async def dc(ctx, *name):
     author = ctx.author
-    dcID = [993465312500527144, 874515432298659850, 1093105047996465233, 891082078383382548, 1053613020338728961, 944864649407528972, 1034103806536978453, 904895148700348437, 943810069051609200, 392482017712930836, 977761484354490388, 652844542881693710, 1021040111997165600, 937726510796779560]
-    osuUsername = ["Shizu Shirokane", "Fuyu Shirokane", "Shoka Shirokane", "Sopia Shirokane", "Yuuki Shirokane", "Mofu Shirokane", "Mita Shirokane", "Ayoko Shirokane", "Ahiru Shirokane", "Huna Shirokane", "Izuna Shirokane", "Kuru Shirokane", "Izumi Shirokane", "Sora Shirokane"]
+    dcID = [993465312500527144, 874515432298659850, 1093105047996465233, 891082078383382548, 1053613020338728961, 944864649407528972, 1034103806536978453, 904895148700348437, 943810069051609200, 392482017712930836, 977761484354490388, 937726510796779560]
+    osuUsername = ["Shizu Shirokane", "Fuyu Shirokane", "Shoka Shirokane", "Sopia Shirokane", "Yuuki Shirokane", "Mofu Shirokane", "Mita Shirokane", "Ayoko Shirokane", "Ahiru Shirokane", "Huna Shirokane", "Izuna Shirokane", "Kuru Shirokane", "Sora Shirokane"]
     embed = discord.Embed(title="SF discord", color=0xff00ff)
     embed.set_footer(text=f"Requested by {author.name}", icon_url=author.display_avatar.url)
     validNames = ["Shoka", "Ahiru", "Ayoko", "Fuyu", "Huna", "Izuna", "Kuru", "Mita", "Mofu", "Shizu", "Sopia", "Sora", "Yuuki", "Izumi"]
     if len(name) != 1 or name[0] not in validNames:
-        for i in range(len(osuUsername)):
-            if osuUsername[i] == "Izumi Shirokane":
-                embed.add_field(name=osuUsername[i], inline=False, value=f"<@{dcID[i]}> \n(member not currently in the team)")
-                continue
-            embed.add_field(name=osuUsername[i], inline=False, value=f"<@{dcID[i]}>")
+        for i in range(len(osuUsername)): embed.add_field(name=osuUsername[i], inline=False, value=f"<@{dcID[i]}>")
         await ctx.send(embed=embed)
     else:
         for i in range(len(osuUsername)):
-            if name[0] + " Shirokane" == "Izumi Shirokane":
-                embed.add_field(name=osuUsername[i], inline=False, value=f"<@{dcID[i]}> \n(member not currently in the team)")
-                continue
-            if osuUsername[i] == name[0] + " Shirokane":
-                embed.add_field(name=osuUsername[i], inline=False, value=birthdays[i])
+            if osuUsername[i] == name[0] + " Shirokane": embed.add_field(name=osuUsername[i], inline=False, value=f"<@{dcID[i]}>")
         await ctx.send(embed=embed)
         
 @bot.command(name="birthday", aliases=["bd"])
 async def birthday(ctx, *name):
     author = ctx.author
-    birthdays = ["20/09", "22/12", "16/02", "13/12", "08/05", "21/07", "18/03", "04/03", "02/04", "12/03", "02/08", "27/04", "22/07 (member not currently in the team)", "21/01"]
-    osuUsername = ["Shizu Shirokane", "Fuyu Shirokane", "Shoka Shirokane", "Sopia Shirokane", "Yuuki Shirokane", "Mofu Shirokane", "Mita Shirokane", "Ayoko Shirokane", "Ahiru Shirokane", "Huna Shirokane", "Izuna Shirokane", "Kuru Shirokane", "Izumi Shirokane", "Sora Shirokane"]
-    validNames = ["Shoka", "Ahiru", "Ayoko", "Fuyu", "Huna", "Izuna", "Kuru", "Mita", "Mofu", "Shizu", "Sopia", "Sora", "Yuuki", "Izumi"]
+    birthdays = ["20/09", "22/12", "16/02", "13/12", "08/05", "21/07", "18/03", "04/03", "02/04", "12/03", "02/08", "27/04", "21/01"]
+    osuUsername = ["Shizu Shirokane", "Fuyu Shirokane", "Shoka Shirokane", "Sopia Shirokane", "Yuuki Shirokane", "Mofu Shirokane", "Mita Shirokane", "Ayoko Shirokane", "Ahiru Shirokane", "Huna Shirokane", "Izuna Shirokane", "Kuru Shirokane", "Sora Shirokane"]
+    validNames = ["Shoka", "Ahiru", "Ayoko", "Fuyu", "Huna", "Izuna", "Kuru", "Mita", "Mofu", "Shizu", "Sopia", "Sora", "Yuuki"]
     if len(name) != 1 or name[0] not in validNames:
         embed = discord.Embed(title="SF birthday", color=0xff00ff)
         embed.set_footer(text=f"Requested by {author.name}", icon_url=author.display_avatar.url)
@@ -333,6 +326,14 @@ async def on_message(message):
     if content == "s!" or content.startswith("s! "):
         channel = message.channel
         await channel.send("Hello?")
+    await bot.process_commands(message)
+
+@bot.event
+async def on_message(message):
+    names = ["Shoka", "Ahiru", "Ayoko", "Fuyu", "Huna", "Izuna", "Kuru", "Mita", "Mofu", "Shizu", "Sopia", "Sora", "Yuuki", "shoka", "ahiru", "ayoko", "fuyu", "huna", "izuna", "kuru", "mita", "mofu", "shizu", "sopia", "sora", "yuuki"]
+    content = message.content.strip()
+    if content in names:
+        await message.reply("bel")
     await bot.process_commands(message)
 
 @bot.event
