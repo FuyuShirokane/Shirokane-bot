@@ -4,6 +4,8 @@ from discord.ext import commands
 import requests
 import json
 from datetime import datetime, timedelta
+import asyncio
+import random
 
 _token = None
 _token_expires = 0
