@@ -316,9 +316,8 @@ async def tyrant(ctx):
     await ctx.send("https://media.discordapp.net/attachments/1261339516573057085/1505401349263855777/697287807_901433076255777_3267157898855959148_n.webp?ex=6adcc502&is=6adb7382&hm=06867433bec086e266179b25bf7274ebcc79984d6151d236c62e7914c0ac304d&=&animated=true")
 
 @bot.command(name="zalo")
-async def tyrant(ctx):
-    await ctx.send("https://images-ext-1.discordapp.net/external/yzBqkBPXeYrbtfDTcJluS0Xs01FrKFw98Zy7LoBusKE/https/static.klipy.com/ii/e7539ef2aad336edaa067c28ee130b3c/9c/a2/HBuDVZQX4Ebm9A.mp4")
-
+async def zalo(ctx):
+    await ctx.send("https://static2.klipy.com/ii/e7539ef2aad336edaa067c28ee130b3c/9c/a2/ODXawJVfDbWT.gif")
 @bot.event
 async def on_ready():
     print(f'Running on discordpy version {discord.__version__}')
