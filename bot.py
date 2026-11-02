@@ -9,8 +9,8 @@ import random
 
 _token = None
 _token_expires = 0
-CLIENT_ID =
-CLIENT_SECRET =
+CLIENT_ID = os.environ.get("OSU_CLIENT_ID")
+CLIENT_SECRET = os.environ.get("OSU_CLIENT_SECRET")
 def numFormat(num):
     return format(num, ",").replace(',', ' ')
 def getToken():
@@ -353,4 +353,4 @@ async def on_command_error(ctx, error):
         await ctx.send("Something went wrong running that command. Pinging <@891082078383382548>")
         raise error
 
-bot.run()
+bot.run(os.environ.get("DISCORD_TOKEN"))
