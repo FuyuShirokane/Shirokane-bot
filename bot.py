@@ -336,10 +336,14 @@ async def on_message(message):
 
 @bot.event
 async def on_message(message):
+    if message.author.bot:
+        return
+
     names = ["Shoka", "Ahiru", "Ayoko", "Fuyu", "Huna", "Izuna", "Kuru", "Mita", "Mofu", "Shizu", "Sopia", "Sora", "Yuuki", "shoka", "ahiru", "ayoko", "fuyu", "huna", "izuna", "kuru", "mita", "mofu", "shizu", "sopia", "sora", "yuuki"]
     content = message.content.strip()
-    if content in names:
+    if any(content.startswith(name) for name in names):
         await message.reply("bel")
+    
     await bot.process_commands(message)
 
 @bot.event
