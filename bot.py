@@ -211,7 +211,7 @@ async def member(ctx, username):
 @bot.command(name="discord", aliases=["d"])
 async def dc(ctx, *name):
     author = ctx.author
-    dcID = [993465312500527144, 874515432298659850, 1093105047996465233, 891082078383382548, 1053613020338728961, 944864649407528972, 1034103806536978453, 904895148700348437, 943810069051609200, 392482017712930836, 977761484354490388, 937726510796779560]
+    dcID = [993465312500527144, 874515432298659850, 1093105047996465233, 891082078383382548, 1053613020338728961, 944864649407528972, 1034103806536978453, 904895148700348437, 943810069051609200, 392482017712930836, 977761484354490388, 652844542881693710, 937726510796779560]
     osuUsername = ["Shizu Shirokane", "Fuyu Shirokane", "Shoka Shirokane", "Sopia Shirokane", "Yuuki Shirokane", "Mofu Shirokane", "Mita Shirokane", "Ayoko Shirokane", "Ahiru Shirokane", "Huna Shirokane", "Izuna Shirokane", "Kuru Shirokane", "Sora Shirokane"]
     embed = discord.Embed(title="SF discord", color=0xff00ff)
     embed.set_footer(text=f"Requested by {author.name}", icon_url=author.display_avatar.url)
@@ -332,6 +332,7 @@ async def on_message(message):
     if content == "s!" or content.startswith("s! "):
         channel = message.channel
         await channel.send("Hello?")
+        
     await bot.process_commands(message)
 
 @bot.event
@@ -355,6 +356,21 @@ async def on_message(message):
     content = message.content.strip()
     if any(content.startswith(name) for name in tuna):
         await message.reply("https://c.tenor.com/2NqeUVsVdmQAAAAC/tenor.gif")
+
+    await bot.process_commands(message)
+
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    
+    gbv = ["gaybaovu", "giabaovu", "Gaybaovu", "Giabaovu"]
+    content = message.content.strip()
+    if any(content.startswith(name) for name in gbv):
+        await message.add_reaction("🏳️‍🌈")
+        await message.add_reaction("<:gaybaovu:1569764677100241008>")
+
+    await bot.process_commands(message)
 
 @bot.event
 async def on_command_error(ctx, error):
