@@ -346,6 +346,16 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
+@bot_event
+async def on_message(message):
+    if message.authot.bot:
+        return
+        
+    tuna = ["tuna", "Tuna", "mayutuna", "MayuTuna", "Mayutuna"]
+    content = message.content.strip()
+    if any(content.startswith(tuna) for name in names):
+        await message.reply("https://media1.tenor.com/m/2NqeUVsVdmQAAAAC/fish-spin-sha.gif")
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
