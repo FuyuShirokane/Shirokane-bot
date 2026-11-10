@@ -346,9 +346,9 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
-@bot_event
+@bot.event
 async def on_message(message):
-    if message.authot.bot:
+    if message.author.bot:
         return
         
     tuna = ["tuna", "Tuna", "mayutuna", "MayuTuna", "Mayutuna"]
