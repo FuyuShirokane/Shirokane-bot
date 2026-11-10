@@ -353,7 +353,7 @@ async def on_message(message):
         
     tuna = ["tuna", "Tuna", "mayutuna", "MayuTuna", "Mayutuna"]
     content = message.content.strip()
-    if any(content.startswith(tuna) for name in names):
+    if any(content.startswith(tuna) for name in tuna):
         await message.reply("https://media1.tenor.com/m/2NqeUVsVdmQAAAAC/fish-spin-sha.gif")
 
 @bot.event
