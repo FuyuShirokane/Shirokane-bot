@@ -321,6 +321,7 @@ async def tyrant(ctx):
 @bot.command(name="zalo")
 async def zalo(ctx):
     await ctx.send("https://static2.klipy.com/ii/e7539ef2aad336edaa067c28ee130b3c/9c/a2/ODXawJVfDbWT.gif")
+    
 @bot.event
 async def on_ready():
     print(f'Running on discordpy version {discord.__version__}')
@@ -328,42 +329,24 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    if message.author.bot:
+        return
+
     content = message.content.strip()
     if content == "s!" or content.startswith("s! "):
         channel = message.channel
         await channel.send("Hello?")
-        
-    await bot.process_commands(message)
-
-@bot.event
-async def on_message(message):
-    if message.author.bot:
-        return
 
     names = ["Shoka", "Ahiru", "Ayoko", "Fuyu", "Huna", "Izuna", "Kuru", "Mita", "Mofu", "Shizu", "Sopia", "Sora", "Yuuki", "shoka", "ahiru", "ayoko", "fuyu", "huna", "izuna", "kuru", "mita", "mofu", "shizu", "sopia", "sora", "yuuki"]
     content = message.content.strip()
     if any(content.startswith(name) for name in names):
         await message.reply("bel")
-    
-    await bot.process_commands(message)
 
-@bot.event
-async def on_message(message):
-    if message.author.bot:
-        return
-        
     tuna = ["tuna", "Tuna", "mayutuna", "MayuTuna", "Mayutuna"]
     content = message.content.strip()
     if any(content.startswith(name) for name in tuna):
         await message.reply("https://c.tenor.com/2NqeUVsVdmQAAAAC/tenor.gif")
 
-    await bot.process_commands(message)
-
-@bot.event
-async def on_message(message):
-    if message.author.bot:
-        return
-    
     gbv = ["gaybaovu", "giabaovu", "Gaybaovu", "Giabaovu"]
     content = message.content.strip()
     if any(content.startswith(name) for name in gbv):
